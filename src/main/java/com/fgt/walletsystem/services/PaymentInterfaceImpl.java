@@ -168,12 +168,16 @@ public class PaymentInterfaceImpl implements PaymentInterface {
         Response response = new Response();
         try {
             Optional <Wallet> wallet = Optional.ofNullable(userRepository.findByEmail(email).get().getWallet());
-            if (wallet.isPresent()) {
-                transaction.setWallet(wallet.get());
-                transactionRepository.save(transaction);
-                response.setResponseCode(ResponseCode.SUCCESS.getCode());
-                response.setResponseMessage(ResponseCode.SUCCESS.getMessage());
+            if (!wallet.isPresent()) {
+                response.setResponseCode(ResponseCode.WALLET_NOT_EXIST.getCode());
+                response.setResponseMessage(ResponseCode.WALLET_NOT_EXIST.getMessage());
+                return response;
             }
+
+            transaction.setWallet(wallet.get());
+            transactionRepository.save(transaction);
+            response.setResponseCode(ResponseCode.SUCCESS.getCode());
+            response.setResponseMessage(ResponseCode.SUCCESS.getMessage());
 
         } catch (Exception exception) {
             log.error("Error on Save to Transaction Log :{} ", exception.getMessage());
