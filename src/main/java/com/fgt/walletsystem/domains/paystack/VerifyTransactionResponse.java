@@ -17,20 +17,23 @@ public class VerifyTransactionResponse {
     @Data
     public class VerifyTransactionData {
         private long id;
-        private BigDecimal amount;
-        private String currency;
-        @JsonProperty("transaction_date")
-        private String transactionDate;
         private String domain;
         private String status;
         private String reference;
-        private String metadata;
+        private BigDecimal amount;
+        private String message;
         @JsonProperty("gateway_response")
         private String gatewayResponse;
-        private String message;
+        @JsonProperty("paid_at")
+        private String paidAt;
+        @JsonProperty("created_at")
+        private String createdAt;
         private String channel;
         @JsonProperty("ip_address")
+        private String currency;
         private String ipAddress;
+        private String metadata;
+        @JsonProperty("transaction_date")
         private Log log;
         private String fees;
         @JsonProperty("fees_split")
@@ -38,31 +41,24 @@ public class VerifyTransactionResponse {
         private Authorization authorization;
         private Customer customer;
         private String plan;
-        @JsonProperty("requested_amount")
-        private BigDecimal requestedAmount;
-        @JsonProperty("paid_at")
-        private String paidAt;
-        @JsonProperty("created_at")
-        private String createdAt;
         private Object split;
         @JsonProperty("order_id")
         private String orderId;
-        @JsonProperty("pos_transaction_data")
-        private Object posTransactionData;
-        private String source;
-        @JsonProperty("plan_object")
-        private Object planObject;
-        @JsonProperty("subaccount")
-        private Object subAccount;
         @JsonProperty("paidAt")
         private String paidAtSecond;
         @JsonProperty("createdAt")
         private String createdAtSecond;
-
-
-
-
-
+        @JsonProperty("requested_amount")
+        private BigDecimal requestedAmount;
+        @JsonProperty("pos_transaction_data")
+        private Object posTransactionData;
+        private String source;
+        @JsonProperty("transaction_date")
+        private String transactionDate;
+        @JsonProperty("plan_object")
+        private Object planObject;
+        @JsonProperty("subaccount")
+        private Object subAccount;
     }
 
     @Data
