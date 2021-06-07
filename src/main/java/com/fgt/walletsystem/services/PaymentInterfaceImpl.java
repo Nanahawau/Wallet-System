@@ -175,15 +175,17 @@ public class PaymentInterfaceImpl implements PaymentInterface {
                 response.setResponseMessage(ResponseCode.WALLET_NOT_EXIST.getMessage());
                 return response;
             } else {
-                Optional <Wallet> wallet = Optional.ofNullable(userRepository.findByEmail(email).get().getWallet());
-                if (wallet.isPresent()) {
-                    transaction.setWallet(wallet.get());
-                    transactionRepository.save(transaction);
-                    response.setResponseCode(ResponseCode.SUCCESS.getCode());
-                    response.setResponseMessage(ResponseCode.SUCCESS.getMessage());
+                Optional <Wallet> wallet = Optional.ofNullable(user.get().getWallet());
+                if (!wallet.isPresent()) {
+                    response.setResponseCode(ResponseCode.WALLET_NOT_EXIST.getCode());
+                    response.setResponseMessage(ResponseCode.WALLET_NOT_EXIST.getMessage());
                     return response;
                 }
 
+                transaction.setWallet(wallet.get());
+                transactionRepository.save(transaction);
+                response.setResponseCode(ResponseCode.SUCCESS.getCode());
+                response.setResponseMessage(ResponseCode.SUCCESS.getMessage());
             }
 
         } catch (Exception exception) {

@@ -11,6 +11,7 @@ import com.fgt.walletsystem.utility.http.RestClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -70,6 +71,7 @@ public class CustomerInterfaceImpl implements CustomerInterface {
      * @return
      */
     @Override
+    @Transactional
     public Response save(CreateWalletDTO createWalletDTO, String customerCode) {
         Response response = new Response();
         try {
@@ -84,7 +86,7 @@ public class CustomerInterfaceImpl implements CustomerInterface {
                 userObject.setFirstName(createWalletDTO.getFirstName());
                 userObject.setLastName(createWalletDTO.getLastName());
                 userObject.setCustomerCode(customerCode);
-                userObject.setWallet(new Wallet());
+                userObject.addWallet(new Wallet());
                 userRepository.save(userObject);
 
                 response.setResponseCode(ResponseCode.SUCCESS.getCode());
