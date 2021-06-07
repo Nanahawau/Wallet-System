@@ -7,10 +7,7 @@ import com.fgt.walletsystem.services.TransactionsInterface;
 import com.fgt.walletsystem.services.WalletInterface;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -27,7 +24,7 @@ public class PaystackCallbackController {
         this.paymentInterface = paymentInterface;
     }
 
-    @PostMapping("/callback")
+    @GetMapping("/callback")
     public ResponseEntity<Response> paystackCallback (@RequestParam("trxref") @Valid String reference) {
         return ResponseEntity.ok(paymentInterface.verifyPayment(reference));
     }
