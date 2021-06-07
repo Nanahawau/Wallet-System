@@ -101,7 +101,7 @@ public class PaymentInterfaceImpl implements PaymentInterface {
             Optional<VerifyTransactionResponse> verifyTransactionResponse = this
                     .restClient.get(baseUrl + "/transaction/verify/" + reference, VerifyTransactionResponse.class);
             log.info("Verify Payment Response :{}", verifyTransactionResponse);
-            if (verifyTransactionResponse.isPresent() && verifyTransactionResponse.get().getTransactionData().getStatus().equalsIgnoreCase("success")) {
+            if (verifyTransactionResponse.isPresent()) {
                 response = saveToWallet(verifyTransactionResponse.get());
             } else {
                 response.setResponseCode(ResponseCode.VERIFICATION_FAILED.getCode());
@@ -131,13 +131,13 @@ public class PaymentInterfaceImpl implements PaymentInterface {
             Optional <Transaction> transaction = Optional.ofNullable(transactionRepository
                     .getTransactionsByTransactionReference(verifyTransactionResponse.getTransactionData().getReference()));
 
+            log.info("Transaction fetched {}: ", transaction);
+
             if(transaction.isPresent()) {
-                Wallet wallet = new Wallet();
                 if (transaction.get().isCreditWallet()) {
-                    wallet.setBalance(transaction.get().getWallet().getBalance().add(verifyTransactionResponse.getTransactionData().getAmount()));
-                    transaction.get().setWallet(wallet);
+                    transaction.get().getWallet().setBalance(transaction.get().getWallet().getBalance().add(verifyTransactionResponse.getTransactionData().getAmount()));
                 } else {
-                    wallet.setBalance(transaction.get().getWallet().getBalance().subtract(UtilityService.nairaEquivalentOfAmount(verifyTransactionResponse.getTransactionData().getAmount())));
+                    transaction.get().getWallet().setBalance(transaction.get().getWallet().getBalance().subtract(UtilityService.nairaEquivalentOfAmount(verifyTransactionResponse.getTransactionData().getAmount())));
                 }
 
                 transaction.get().setVerifyTransactionDate(verifyTransactionResponse.getTransactionData().getTransactionDate());
@@ -155,6 +155,7 @@ public class PaymentInterfaceImpl implements PaymentInterface {
 
         } catch (Exception exception) {
             log.error("Error on Save to wallet {}: ", exception.getMessage());
+            exception.printStackTrace();
             response.setResponseCode(ResponseCode.ERROR.getCode());
             response.setResponseMessage(ResponseCode.ERROR.getMessage());
             return response;
