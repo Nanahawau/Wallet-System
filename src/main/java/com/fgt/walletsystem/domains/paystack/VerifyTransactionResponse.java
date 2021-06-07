@@ -61,7 +61,7 @@ public class VerifyTransactionResponse {
     }
 
     @Data
-    public class Log {
+    public static class Log {
         @JsonProperty("time_spent")
         private int timeSpent;
         @JsonProperty("start_time")
