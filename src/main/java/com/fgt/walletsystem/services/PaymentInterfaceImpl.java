@@ -135,9 +135,9 @@ public class PaymentInterfaceImpl implements PaymentInterface {
 
             log.info("Transaction fetched {}: ", transaction);
 
-            if(transaction.isPresent()) {
+            if(transaction.isPresent() && verifyTransactionResponse.getTransactionData().getStatus().equalsIgnoreCase("success")) {
                 if (transaction.get().isCreditWallet()) {
-                    transaction.get().getWallet().setBalance(transaction.get().getWallet().getBalance().add(verifyTransactionResponse.getTransactionData().getAmount()));
+                    transaction.get().getWallet().setBalance(transaction.get().getWallet().getBalance().add(UtilityService.nairaEquivalentOfAmount(verifyTransactionResponse.getTransactionData().getAmount())));
                 } else {
                     transaction.get().getWallet().setBalance(transaction.get().getWallet().getBalance().subtract(UtilityService.nairaEquivalentOfAmount(verifyTransactionResponse.getTransactionData().getAmount())));
                 }
