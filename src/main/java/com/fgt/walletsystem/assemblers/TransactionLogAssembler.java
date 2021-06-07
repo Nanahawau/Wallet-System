@@ -38,21 +38,11 @@ public class TransactionLogAssembler {
         transaction.setPaystackReference(reference);
         transaction.setCreditWallet(UtilityService.determineCreditFromTransactionType(initiateTransactionDTO.getTransactionType()));
         transaction.setDebitWallet(UtilityService.determineDebitFromTransactionType(initiateTransactionDTO.getTransactionType()));
+        transaction.setTransactionReference(initiateTransactionDTO.getReference());
+        transaction.setAmount(UtilityService.nairaEquivalentOfAmount(initiateTransactionDTO.getAmount()));
 
         return transaction;
     }
 
-
-    // TODO: remove commented out code;
-//
-//    public static void test(String value) {
-//        System.out.println(TransactionType.valueOf(TransactionType.class, value.toUpperCase(Locale.ROOT)));
-//        System.out.println(UtilityService.determineDebitFromTransactionType(value));
-//    }
-//
-//
-//    public static void main(String[] args) {
-//       test("payment");
-//    }
 
 }

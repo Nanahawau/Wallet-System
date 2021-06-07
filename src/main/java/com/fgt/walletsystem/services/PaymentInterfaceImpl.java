@@ -69,7 +69,6 @@ public class PaymentInterfaceImpl implements PaymentInterface {
                         initiateTransactionDTO.getEmail());
                 log.info("Transaction Log Response {}: ", transactionLogResponse);
 
-                // TODO: Test this guy with several scenarios.
                 if (!transactionLogResponse.getResponseCode().equalsIgnoreCase("000")) {
                   return transactionLogResponse;
                 }
