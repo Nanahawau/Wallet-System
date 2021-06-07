@@ -16,6 +16,7 @@ public class VerifyTransactionResponse {
 
     @Data
     public class VerifyTransactionData {
+        private long id;
         private BigDecimal amount;
         private String currency;
         @JsonProperty("transaction_date")
@@ -32,11 +33,29 @@ public class VerifyTransactionResponse {
         private String ipAddress;
         private Log log;
         private String fees;
+        @JsonProperty("fees_split")
+        private Object feeSplits;
         private Authorization authorization;
         private Customer customer;
         private String plan;
         @JsonProperty("requested_amount")
         private BigDecimal requestedAmount;
+        @JsonProperty("paid_at")
+        private String paidAt;
+        @JsonProperty("created_at")
+        private String createdAt;
+        private Object split;
+        @JsonProperty("order_id")
+        private String orderId;
+        @JsonProperty("pos_transaction_data")
+        private Object posTransactionData;
+        private String source;
+        @JsonProperty("plan_object")
+        private Object planObject;
+        @JsonProperty("subaccount")
+        private Object subAccount;
+
+
 
 
     }
@@ -45,6 +64,8 @@ public class VerifyTransactionResponse {
     public class Log {
         @JsonProperty("time_spent")
         private int timeSpent;
+        @JsonProperty("start_time")
+        private int startTime;
         private int attempts;
         private String authentication;
         private int errors;
@@ -85,18 +106,25 @@ public class VerifyTransactionResponse {
         private String countryCode;
         @JsonProperty("account_name")
         private String accountName;
+        private String brand;
     }
 
     @Data
     public class Customer {
         private long id;
-        @JsonProperty("customer_code")
-        private String customerCode;
         @JsonProperty("first_name")
         private String firstName;
         @JsonProperty("last_name")
         private String lastName;
-        @JsonProperty("email")
+        @JsonProperty("risk_action")
+        private String riskAction;
+        @JsonProperty("phone")
+        private String phoneNumber;
         private String email;
+        private long integration;
+        @JsonProperty("international_format_phone")
+        private String intlPhoneNumberFormat;
+        @JsonProperty("customer_code")
+        private String customerCode;
     }
 }
