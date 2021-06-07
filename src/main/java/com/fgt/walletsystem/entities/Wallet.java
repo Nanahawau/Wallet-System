@@ -1,5 +1,6 @@
 package com.fgt.walletsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fgt.walletsystem.models.Audit;
 
 import javax.persistence.*;
@@ -51,18 +52,22 @@ public class Wallet extends Audit {
         this.balance = balance;
     }
 
+    @JsonIgnore
     public User getUser() {
         return user;
     }
 
+    @JsonIgnore
     public List<Transaction> getTransactions() {
         return transactions;
     }
 
+    @JsonIgnore
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 
+    @JsonIgnore
     public void setUser(User user) {
         this.user = user;
     }
