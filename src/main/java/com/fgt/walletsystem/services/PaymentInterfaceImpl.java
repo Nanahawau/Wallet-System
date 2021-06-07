@@ -5,6 +5,7 @@ import com.fgt.walletsystem.assemblers.TransactionLogAssembler;
 import com.fgt.walletsystem.domains.paystack.InitializeTransactionResponse;
 import com.fgt.walletsystem.domains.paystack.VerifyTransactionResponse;
 import com.fgt.walletsystem.entities.Transaction;
+import com.fgt.walletsystem.entities.User;
 import com.fgt.walletsystem.entities.Wallet;
 import com.fgt.walletsystem.enums.ResponseCode;
 import com.fgt.walletsystem.models.Response;
@@ -167,17 +168,21 @@ public class PaymentInterfaceImpl implements PaymentInterface {
     public Response saveToTransactionLog(Transaction transaction, String email) {
         Response response = new Response();
         try {
-            Optional <Wallet> wallet = Optional.ofNullable(userRepository.findByEmail(email).get().getWallet());
-            if (!wallet.isPresent()) {
+            Optional<User> user = userRepository.findByEmail(email);
+            if (!user.isPresent()) {
                 response.setResponseCode(ResponseCode.WALLET_NOT_EXIST.getCode());
                 response.setResponseMessage(ResponseCode.WALLET_NOT_EXIST.getMessage());
                 return response;
-            }
+            } else {
+                Optional <Wallet> wallet = Optional.ofNullable(userRepository.findByEmail(email).get().getWallet());
+                if (wallet.isPresent()) {
+                    transaction.setWallet(wallet.get());
+                    transactionRepository.save(transaction);
+                    response.setResponseCode(ResponseCode.SUCCESS.getCode());
+                    response.setResponseMessage(ResponseCode.SUCCESS.getMessage());
+                }
 
-            transaction.setWallet(wallet.get());
-            transactionRepository.save(transaction);
-            response.setResponseCode(ResponseCode.SUCCESS.getCode());
-            response.setResponseMessage(ResponseCode.SUCCESS.getMessage());
+            }
 
         } catch (Exception exception) {
             log.error("Error on Save to Transaction Log :{} ", exception.getMessage());
