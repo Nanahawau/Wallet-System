@@ -120,6 +120,7 @@ public class VerifyTransactionResponse {
         private String riskAction;
         @JsonProperty("phone")
         private String phoneNumber;
+        private Object metadata;
         private String email;
         private long integration;
         @JsonProperty("international_format_phone")
