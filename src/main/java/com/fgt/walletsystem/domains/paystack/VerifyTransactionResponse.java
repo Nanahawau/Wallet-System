@@ -54,6 +54,11 @@ public class VerifyTransactionResponse {
         private Object planObject;
         @JsonProperty("subaccount")
         private Object subAccount;
+        @JsonProperty("paidAt")
+        private String paidAtSecond;
+        @JsonProperty("createdAt")
+        private String createdAtSecond;
+
 
 
 
@@ -71,7 +76,7 @@ public class VerifyTransactionResponse {
         private int errors;
         private boolean success;
         private boolean mobile;
-        private List<String> input;
+        private List<?> input;
         @JsonProperty("history")
         private List<History> histories;
 

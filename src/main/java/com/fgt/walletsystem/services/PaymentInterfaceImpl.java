@@ -103,6 +103,10 @@ public class PaymentInterfaceImpl implements PaymentInterface {
             log.info("Verify Payment Response :{}", verifyTransactionResponse);
             if (verifyTransactionResponse.isPresent() && verifyTransactionResponse.get().getTransactionData().getStatus().equalsIgnoreCase("success")) {
                 response = saveToWallet(verifyTransactionResponse.get());
+            } else {
+                response.setResponseCode(ResponseCode.VERIFICATION_FAILED.getCode());
+                response.setResponseMessage(ResponseCode.VERIFICATION_FAILED.getMessage());
+                return response;
             }
         } catch (Exception exception) {
             log.error("Error on Create customer {}: ", exception.getMessage());

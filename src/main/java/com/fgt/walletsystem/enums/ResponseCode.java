@@ -4,7 +4,8 @@ public enum ResponseCode {
 	SUCCESS("000", "Successful"), ERROR("99", "Failed"),
 	WALLET_EXISTS("99", "A wallet already exists for this email"),
 	WALLET_CREATION_FAILED("100", "An error occurred while creating wallet"),
-	WALLET_NOT_EXIST("101", "Wallet doesn't exist");
+	WALLET_NOT_EXIST("101", "Wallet doesn't exist"),
+	VERIFICATION_FAILED("103", "Payment Failed at Paystack");
 	
 	private String code;
 	private String message;
