@@ -46,7 +46,7 @@ public class WalletController {
     }
 
     @PostMapping("/paystack-callback")
-    public ResponseEntity<Response> paystackCallback (@RequestParam @Valid String reference) {
+    public ResponseEntity<Response> paystackCallback (@RequestParam("trxref") @Valid String reference) {
         return ResponseEntity.ok(paymentInterface.verifyPayment(reference));
     }
 

@@ -13,6 +13,6 @@ public class WebConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(interceptor).excludePathPatterns("/credentials");
+		registry.addInterceptor(interceptor).excludePathPatterns("/api/v1/wallet/paystack-callback");
 	}
 }

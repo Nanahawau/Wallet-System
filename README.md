@@ -1,6 +1,6 @@
 # Wallet System
 
-A Wallet System 
+Wallet System is a wallet application that leverages on the Payment Gateway - Paystack.
 
 ## Getting Started
 
@@ -32,7 +32,7 @@ the project on a live system.
 ```
 * Weblogic Server
 * Sprint Boot
-* H2 Database
+* Postgres Database
 ```
 
 ## Built With
