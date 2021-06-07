@@ -114,8 +114,8 @@ public class RestClient {
             CloseableHttpResponse response = httpclient.execute(postRequest);
             try {
                 if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-//                    log.info("RestClient response {}: ");
-//                    UtilityService.convertInputStreamToString(response.getEntity().getContent())
+                    log.info("RestClient response {}: ", UtilityService.convertInputStreamToString(response.getEntity().getContent()));
+
                     objectMapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
                     res = objectMapper.readValue(response.getEntity().getContent(), elementClass);
                 } else {
