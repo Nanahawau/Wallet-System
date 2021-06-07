@@ -68,12 +68,12 @@ public class PaymentInterfaceImpl implements PaymentInterface {
                 log.info("Transaction Log Response {}: ", transactionLogResponse);
 
                 // TODO: Test this guy with several scenarios.
-                if (transactionLogResponse.getResponseCode().equalsIgnoreCase("000")) {
-                    response.setResponseCode(ResponseCode.SUCCESS.getCode());
-                    response.setResponseMessage(ResponseCode.SUCCESS.getMessage());
-                    response.setData(initializeTransactionResponse.get().getInitializeTransactionData());
+                if (!transactionLogResponse.getResponseCode().equalsIgnoreCase("000")) {
+                  return transactionLogResponse;
                 }
-
+                response.setResponseCode(ResponseCode.SUCCESS.getCode());
+                response.setResponseMessage(ResponseCode.SUCCESS.getMessage());
+                response.setData(initializeTransactionResponse.get().getInitializeTransactionData());
             }
         } catch (Exception exception) {
             log.error("Error on Create customer {}: ", exception.getMessage());
