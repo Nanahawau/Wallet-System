@@ -79,14 +79,14 @@ public class VerifyTransactionResponse {
     }
 
     @Data
-    public class History {
+    public static class History {
         private String type;
         private String message;
         private int time;
     }
 
     @Data
-    public class Authorization {
+    public static class Authorization {
         @JsonProperty("authorization_code")
         private String authorizationCode;
         @JsonProperty("card_type")
@@ -110,7 +110,7 @@ public class VerifyTransactionResponse {
     }
 
     @Data
-    public class Customer {
+    public static class Customer {
         private long id;
         @JsonProperty("first_name")
         private String firstName;
