@@ -1,4 +1,4 @@
-package exceptions;
+package com.fgt.walletsystem.exceptions;
 
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.fgt.walletsystem.models.ErrorResponse;
