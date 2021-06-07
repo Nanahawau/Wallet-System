@@ -21,13 +21,13 @@ public class WalletController {
     private final PaymentInterface paymentInterface;
     private final CustomerInterface customerInterface;
     private final WalletInterface walletInterface;
-    private final TransactionsInterface transactionsInterface;
 
-    public WalletController(PaymentInterface paymentInterface, CustomerInterface customerInterface, WalletInterface walletInterface, TransactionsInterface transactionsInterface) {
+
+    public WalletController(PaymentInterface paymentInterface, CustomerInterface customerInterface, WalletInterface walletInterface)
+                            {
         this.paymentInterface = paymentInterface;
         this.customerInterface = customerInterface;
         this.walletInterface = walletInterface;
-        this.transactionsInterface = transactionsInterface;
     }
 
     @PostMapping
@@ -45,10 +45,6 @@ public class WalletController {
         return ResponseEntity.ok(paymentInterface.initializeTransaction(initiateTransactionDTO));
     }
 
-    @PostMapping("/paystack-callback")
-    public ResponseEntity<Response> paystackCallback (@RequestParam("trxref") @Valid String reference) {
-        return ResponseEntity.ok(paymentInterface.verifyPayment(reference));
-    }
 
 
 
