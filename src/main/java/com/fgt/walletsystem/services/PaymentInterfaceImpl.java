@@ -76,7 +76,8 @@ public class PaymentInterfaceImpl implements PaymentInterface {
                 response.setData(initializeTransactionResponse.get().getInitializeTransactionData());
             }
         } catch (Exception exception) {
-            log.error("Error on Create customer {}: ", exception.getMessage());
+            log.error("Error on Initialize Transaction {}: ", exception.getMessage());
+            exception.printStackTrace();
             response.setResponseCode(ResponseCode.ERROR.getCode());
             response.setResponseMessage(ResponseCode.ERROR.getMessage());
             return response;
