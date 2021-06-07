@@ -7,7 +7,8 @@ import com.fgt.walletsystem.enums.TransactionType;
 import com.fgt.walletsystem.utility.UtilityService;
 import org.springframework.stereotype.Component;
 
-import java.util.Locale;
+import java.math.BigDecimal;
+
 
 @Component
 public class TransactionLogAssembler {
@@ -22,7 +23,7 @@ public class TransactionLogAssembler {
         transaction.setChannel(verifyTransactionResponse.getTransactionData().getChannel());
         transaction.setAmount(UtilityService.nairaEquivalentOfAmount(verifyTransactionResponse.getTransactionData().getAmount()));
         transaction.setCurrency(verifyTransactionResponse.getTransactionData().getCurrency());
-        transaction.setFees(verifyTransactionResponse.getTransactionData().getFees());
+        transaction.setFees(UtilityService.nairaEquivalentOfAmount(new BigDecimal(verifyTransactionResponse.getTransactionData().getFees())));
         transaction.setIpAddress(verifyTransactionResponse.getTransactionData().getIpAddress());
 
         return transaction;

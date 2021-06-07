@@ -27,7 +27,7 @@ public class Transaction extends Audit {
     private String currency;
     private String channel;
     private String ipAddress;
-    private String fees;
+    private BigDecimal fees;
     private String message;
     private boolean creditWallet = false;
     private boolean debitWallet = false;
@@ -142,11 +142,11 @@ public class Transaction extends Audit {
         this.ipAddress = ipAddress;
     }
 
-    public String getFees() {
+    public BigDecimal getFees() {
         return fees;
     }
 
-    public void setFees(String fees) {
+    public void setFees(BigDecimal fees) {
         this.fees = fees;
     }
 

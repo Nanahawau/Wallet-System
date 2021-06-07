@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 
@@ -144,7 +145,7 @@ public class PaymentInterfaceImpl implements PaymentInterface {
                 transaction.get().getWallet().setCurrency(verifyTransactionResponse.getTransactionData().getCurrency());
                 transaction.get().setVerifyTransactionDate(verifyTransactionResponse.getTransactionData().getTransactionDate());
                 transaction.get().setMessage(verifyTransactionResponse.getMessage());
-                transaction.get().setFees(verifyTransactionResponse.getTransactionData().getFees());
+                transaction.get().setFees(UtilityService.nairaEquivalentOfAmount(new BigDecimal(verifyTransactionResponse.getTransactionData().getFees())));
                 transaction.get().setCurrency(verifyTransactionResponse.getTransactionData().getCurrency());
                 transaction.get().setIpAddress(verifyTransactionResponse.getTransactionData().getIpAddress());
                 transaction.get().setChannel(verifyTransactionResponse.getTransactionData().getChannel());
