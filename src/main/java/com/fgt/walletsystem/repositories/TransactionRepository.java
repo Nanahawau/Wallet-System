@@ -8,6 +8,6 @@ import java.util.List;
 
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    Transaction getTransactionsByTransactionReference(String reference);
+    Transaction getTransactionsByPaystackReference(String reference);
     List<Transaction> getTransactionsByWallet(Wallet wallet);
 }

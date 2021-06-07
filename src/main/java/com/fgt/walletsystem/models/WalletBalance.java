@@ -8,4 +8,5 @@ import java.math.BigDecimal;
 public class WalletBalance {
     private long id;
     private BigDecimal balance;
+    private String currency;
 }

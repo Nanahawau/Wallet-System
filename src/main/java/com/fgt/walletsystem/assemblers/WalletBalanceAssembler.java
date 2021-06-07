@@ -13,6 +13,8 @@ public class WalletBalanceAssembler {
         WalletBalance walletBalance = new WalletBalance();
         walletBalance.setId(wallet.getId());
         walletBalance.setBalance(wallet.getBalance());
+        walletBalance.setCurrency(wallet.getCurrency());
+
         response.setData(walletBalance);
         return response;
     }

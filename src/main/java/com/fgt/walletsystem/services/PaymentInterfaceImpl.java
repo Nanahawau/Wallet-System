@@ -63,7 +63,9 @@ public class PaymentInterfaceImpl implements PaymentInterface {
             log.info("Create customer response Paystack {}: ", initializeTransactionResponse);
             if (initializeTransactionResponse.isPresent() && initializeTransactionResponse.get().isStatus()) {
                 log.info("Initialize Transaction Response {}: ", initializeTransactionResponse);
-                Response transactionLogResponse = saveToTransactionLog(transactionLogAssembler.fromInitiateTransactionDTO(initiateTransactionDTO),
+
+                Response transactionLogResponse = saveToTransactionLog(transactionLogAssembler.fromInitiateTransactionDTO(initiateTransactionDTO,
+                        initializeTransactionResponse.get().getInitializeTransactionData().getTransactionReference()),
                         initiateTransactionDTO.getEmail());
                 log.info("Transaction Log Response {}: ", transactionLogResponse);
 
@@ -129,7 +131,7 @@ public class PaymentInterfaceImpl implements PaymentInterface {
 
         try {
             Optional <Transaction> transaction = Optional.ofNullable(transactionRepository
-                    .getTransactionsByTransactionReference(verifyTransactionResponse.getTransactionData().getReference()));
+                    .getTransactionsByPaystackReference(verifyTransactionResponse.getTransactionData().getReference()));
 
             log.info("Transaction fetched {}: ", transaction);
 
@@ -140,6 +142,7 @@ public class PaymentInterfaceImpl implements PaymentInterface {
                     transaction.get().getWallet().setBalance(transaction.get().getWallet().getBalance().subtract(UtilityService.nairaEquivalentOfAmount(verifyTransactionResponse.getTransactionData().getAmount())));
                 }
 
+                transaction.get().getWallet().setCurrency(verifyTransactionResponse.getTransactionData().getCurrency());
                 transaction.get().setVerifyTransactionDate(verifyTransactionResponse.getTransactionData().getTransactionDate());
                 transaction.get().setMessage(verifyTransactionResponse.getMessage());
                 transaction.get().setFees(verifyTransactionResponse.getTransactionData().getFees());

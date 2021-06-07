@@ -17,6 +17,7 @@ public class Wallet extends Audit {
     @SequenceGenerator(name="wallet_seqgen", sequenceName="Wallet_SEQ",allocationSize=1)
     private long id;
     private BigDecimal balance = BigDecimal.ZERO;
+    private String currency;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_accounts_id")
     private User user;
@@ -35,6 +36,14 @@ public class Wallet extends Audit {
         transaction.setWallet( null );
     }
 
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
     public long getId() {
         return id;

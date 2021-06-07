@@ -30,13 +30,15 @@ public class TransactionLogAssembler {
 
 
 
-    public Transaction fromInitiateTransactionDTO(InitiateTransactionDTO initiateTransactionDTO) {
+    public Transaction fromInitiateTransactionDTO(InitiateTransactionDTO initiateTransactionDTO, String reference) {
         Transaction transaction = new Transaction();
         transaction.setTransactionType(TransactionType.valueOf(TransactionType.class, initiateTransactionDTO.getTransactionType().toUpperCase()));
         transaction.setNarration(initiateTransactionDTO.getTransactionType());
         transaction.setMessage("Awaiting Payment Verification from Paystack");
+        transaction.setPaystackReference(reference);
         transaction.setCreditWallet(UtilityService.determineCreditFromTransactionType(initiateTransactionDTO.getTransactionType()));
         transaction.setDebitWallet(UtilityService.determineDebitFromTransactionType(initiateTransactionDTO.getTransactionType()));
+
         return transaction;
     }
 

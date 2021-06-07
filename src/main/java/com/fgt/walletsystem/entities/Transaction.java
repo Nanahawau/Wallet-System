@@ -31,6 +31,7 @@ public class Transaction extends Audit {
     private String message;
     private boolean creditWallet = false;
     private boolean debitWallet = false;
+    private String paystackReference;
 
 
     @ManyToOne( fetch = FetchType.LAZY)
@@ -42,6 +43,14 @@ public class Transaction extends Audit {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getPaystackReference() {
+        return paystackReference;
+    }
+
+    public void setPaystackReference(String paystackReference) {
+        this.paystackReference = paystackReference;
     }
 
     public String getTransactionReference() {
