@@ -12,7 +12,7 @@ the project on a live system.
 1. Pull/download code from [repository](https://github.com/Nanahawau/Wallet-System.git)
 
 2. Download dependencies from Maven on the pom.xml
-3. Set Database Credentials, Client Id and Secret, Log File Path in property file
+3. Set Database Credentials, Client Id and Secret, Log File Path, Paystack Secret Key, Paystack Public Key in property file
 
 4. Build and Package deployable .war artefact
 5.  Deploy on an application server of your choice
