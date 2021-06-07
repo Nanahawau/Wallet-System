@@ -29,8 +29,8 @@ public class VerifyTransactionResponse {
         @JsonProperty("created_at")
         private String createdAt;
         private String channel;
-        @JsonProperty("ip_address")
         private String currency;
+        @JsonProperty("ip_address")
         private String ipAddress;
         private String metadata;
         private Log log;
