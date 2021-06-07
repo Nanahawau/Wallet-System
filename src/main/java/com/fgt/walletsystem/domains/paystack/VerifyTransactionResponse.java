@@ -1,0 +1,102 @@
+package com.fgt.walletsystem.domains.paystack;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@Data
+public class VerifyTransactionResponse {
+    private boolean status;
+    private String message;
+    @JsonProperty("data")
+    private VerifyTransactionData transactionData;
+
+
+    @Data
+    public class VerifyTransactionData {
+        private BigDecimal amount;
+        private String currency;
+        @JsonProperty("transaction_date")
+        private String transactionDate;
+        private String domain;
+        private String status;
+        private String reference;
+        private String metadata;
+        @JsonProperty("gateway_response")
+        private String gatewayResponse;
+        private String message;
+        private String channel;
+        @JsonProperty("ip_address")
+        private String ipAddress;
+        private Log log;
+        private String fees;
+        private Authorization authorization;
+        private Customer customer;
+        private String plan;
+        @JsonProperty("requested_amount")
+        private BigDecimal requestedAmount;
+
+
+    }
+
+    @Data
+    public class Log {
+        @JsonProperty("time_spent")
+        private int timeSpent;
+        private int attempts;
+        private String authentication;
+        private int errors;
+        private boolean success;
+        private boolean mobile;
+        private List<String> input;
+        @JsonProperty("history")
+        private List<History> histories;
+
+
+    }
+
+    @Data
+    public class History {
+        private String type;
+        private String message;
+        private int time;
+    }
+
+    @Data
+    public class Authorization {
+        @JsonProperty("authorization_code")
+        private String authorizationCode;
+        @JsonProperty("card_type")
+        private String cardType;
+        @JsonProperty("last4")
+        private String lastFourDigitsOfCards;
+        @JsonProperty("exp_month")
+        private String expiryMonth;
+        @JsonProperty("exp_year")
+        private String expiryYear;
+        private String bin;
+        private String bank;
+        private String channel;
+        private String signature;
+        private boolean reusable;
+        @JsonProperty("country_code")
+        private String countryCode;
+        @JsonProperty("account_name")
+        private String accountName;
+    }
+
+    @Data
+    public class Customer {
+        private long id;
+        @JsonProperty("customer_code")
+        private String customerCode;
+        @JsonProperty("first_name")
+        private String firstName;
+        @JsonProperty("last_name")
+        private String lastName;
+        @JsonProperty("email")
+        private String email;
+    }
+}
