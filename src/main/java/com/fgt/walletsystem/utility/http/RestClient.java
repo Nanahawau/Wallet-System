@@ -4,7 +4,6 @@ package com.fgt.walletsystem.utility.http;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fgt.walletsystem.utility.UtilityService;
-import com.fgt.walletsystem.utility.http.HttpUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -43,7 +42,7 @@ public class RestClient {
             try {
                 if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                     objectMapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
-//                    log.info("RestClient response {}: ", UtilityService.convertInputStreamToString(response.getEntity().getContent()));
+                    log.info("RestClient response {}: ", UtilityService.convertInputStreamToString(response.getEntity().getContent()));
                     res = objectMapper.readValue(response.getEntity().getContent(), elementClass);
                 } else {
                     String error = printError(response);

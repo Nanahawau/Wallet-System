@@ -128,7 +128,7 @@ public class PaymentInterfaceImpl implements PaymentInterface {
             if(transaction.isPresent()) {
                 Wallet wallet = new Wallet();
                 if (transaction.get().isCreditWallet()) {
-                    wallet.setBalance(transaction.get().getWallet().getBalance().add(UtilityService.nairaEquivalentOfAmount(verifyTransactionResponse.getTransactionData().getAmount())));
+                    wallet.setBalance(transaction.get().getWallet().getBalance().add(verifyTransactionResponse.getTransactionData().getAmount()));
                     transaction.get().setWallet(wallet);
                 } else {
                     wallet.setBalance(transaction.get().getWallet().getBalance().subtract(UtilityService.nairaEquivalentOfAmount(verifyTransactionResponse.getTransactionData().getAmount())));
